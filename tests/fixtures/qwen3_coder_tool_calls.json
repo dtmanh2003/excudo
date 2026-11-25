@@ -1,0 +1,180 @@
+{
+  "model": "unsloth/Qwen3.8-27B-NVFP4",
+  "tool_call_parser": "qwen3_coder",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Read a file",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "grep",
+        "description": "Search files",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "pattern"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file",
+        "description": "Write a file",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "bash_exec",
+        "description": "Run a command",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "command"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "save_expense_record",
+        "description": "Save a receipt record",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "record": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "record"
+          ]
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "name": "two_calls",
+      "raw_content": "<tool_call>\n<function=read_file>\n<parameter=path>\ncalc.py\n</parameter>\n</function>\n</tool_call>\n<tool_call>\n<function=grep>\n<parameter=pattern>\naverage\n</parameter>\n<parameter=path>\nsrc\n</parameter>\n</function>\n</tool_call>",
+      "vllm_parsed": [
+        {
+          "name": "read_file",
+          "arguments": {
+            "path": "calc.py"
+          }
+        },
+        {
+          "name": "grep",
+          "arguments": {
+            "pattern": "average",
+            "path": "src"
+          }
+        }
+      ]
+    },
+    {
+      "name": "multiline",
+      "raw_content": "<tool_call>\n<function=write_file>\n<parameter=path>\nhello.py\n</parameter>\n<parameter=content>\ndef greet():\n    print(\"Hello\")\n\ngreet()\n\n</parameter>\n</function>\n</tool_call>",
+      "vllm_parsed": [
+        {
+          "name": "write_file",
+          "arguments": {
+            "path": "hello.py",
+            "content": "def greet():\n    print(\"Hello\")\n\ngreet()"
+          }
+        }
+      ]
+    },
+    {
+      "name": "integer",
+      "raw_content": "<tool_call>\n<function=bash_exec>\n<parameter=command>\nuv run pytest -q\n</parameter>\n<parameter=timeout>\n120\n</parameter>\n</function>\n</tool_call>",
+      "vllm_parsed": [
+        {
+          "name": "bash_exec",
+          "arguments": {
+            "command": "uv run pytest -q",
+            "timeout": 120
+          }
+        }
+      ]
+    },
+    {
+      "name": "object_array",
+      "raw_content": "<tool_call>\n<function=save_expense_record>\n<parameter=record>\n{\"date\": \"2026-10-02\", \"merchant\": \"サンプル食堂\", \"total\": 980, \"currency\": \"JPY\"}\n</parameter>\n<parameter=tags>\n[\"lunch\", \"team\"]\n</parameter>\n</function>\n</tool_call>",
+      "vllm_parsed": [
+        {
+          "name": "save_expense_record",
+          "arguments": {
+            "record": {
+              "date": "2026-10-02",
+              "merchant": "サンプル食堂",
+              "total": 980,
+              "currency": "JPY"
+            },
+            "tags": [
+              "lunch",
+              "team"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local API keys (share only the empty example)
+.env
+.env.*
+!.env.example
+
+# Excudo local data (sessions)
+.excudo/
+
+# Local receipt records and generated expense reports.
+/receipt_data/
+
+# Local data kept from the zun prototype; never publish or automatically migrate it.
+keichan_data/
+CLI_MAIN_INTEGRATION.md
+docs/*_SECURITY_REVIEW_*.md
+
+# React/Ink dependencies
+cli/node_modules/

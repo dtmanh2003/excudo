@@ -1,0 +1,19 @@
+{
+  "name": "excudo-cli",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "ink": "7.0.5",
+    "react": "19.2.0",
+    "wrap-ansi": "9.0.2"
+  },
+  "devDependencies": {
+    "ink-testing-library": "4.0.0"
+  }
+}

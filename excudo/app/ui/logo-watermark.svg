@@ -1,0 +1,9 @@
+<svg opacity="0.045" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Excudo: a beaver holding a leafy branch" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path class="logo-spine" pathLength="1" d="M16 42C10 37 4 41 5 48c1 8 8 10 15 3M8 45l7 6M8 50l5-7" fill="#f1e9d9" stroke="#9c8765" stroke-width="1.5"/>
+    <path class="logo-frame" pathLength="1" d="M19 26c-4-3-3-8 0-10-1-5 5-7 8-3 8-2 13 4 13 10 0 4-3 7-4 9 6 6 8 15 2 19-6 5-20 4-24-2-5-7-1-17 5-23Z" fill="#fbfaf5" stroke="#506c68" stroke-width="1.8"/>
+    <path class="logo-top" pathLength="1" d="M29 24c3-3 8-3 10 0 2 4-4 7-9 4M30 30v5h5v-5M21 17c0-2 2-3 4-2" stroke="#506c68" stroke-width="1.5"/>
+    <path class="logo-middle" pathLength="1" d="M34 48l19-28M45 32c-6-1-8-5-7-9 5 0 8 3 7 9ZM49 26c0-6 4-10 10-9-1 5-5 9-10 9Z" stroke="#859b7c" stroke-width="1.7"/>
+    <path class="logo-bottom" pathLength="1" d="M23 37c0 4 4 6 9 5m1-6c-3 0-5 3-2 5 2 1 5 0 6-2M18 50h7m5 1h6" stroke="#506c68" stroke-width="1.7"/>
+    <g class="logo-corners" fill="#506c68" stroke="none"><circle cx="28" cy="20.5" r="1.2"/><ellipse cx="36.5" cy="24" rx="1.8" ry="1.25"/></g>
+  </svg>
+

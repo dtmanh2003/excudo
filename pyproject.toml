@@ -1,0 +1,37 @@
+[project]
+name = "excudo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "openai>=3.14.1",
+    "pillow>=13.0.0",
+    "prompt-toolkit>=3.0.53",
+    "pydantic>=2.13.5",
+    "python-dotenv>=1.2.4",
+    "pyyaml>=6.0.3",
+    "rich>=15.0.0",
+    "tzdata>=2025.2",
+]
+
+[project.optional-dependencies]
+studio = ["pypdfium2>=5.14.0", "python-docx>=1.2.0", "defusedxml>=0.7.1"]
+keichan = ["openpyxl>=3.1.5"]
+desktop = [
+    "pywebview>=6.2.1",
+]
+browser = [
+    "playwright>=1.64.0",
+]
+
+[tool.uv]
+python-preference = "only-managed"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

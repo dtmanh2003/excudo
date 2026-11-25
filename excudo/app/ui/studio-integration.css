@@ -1,0 +1,144 @@
+.card > summary { cursor: pointer; overflow-wrap: anywhere; }
+.card > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.card.approval[open] > summary { cursor: default; }
+.card[open] > summary { margin-bottom: 8px; }
+
+/* Messages must keep their height as the flex column grows beyond the viewport. */
+#messages > * { flex-shrink: 0; }
+
+.sent-images { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.sent-images figure { margin: 0; width: 96px; }
+.sent-images img { display: block; width: 96px; height: 72px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
+.sent-images figcaption { margin-top: 4px; font-size: 12px; overflow-wrap: anywhere; }
+.sent-images img { cursor: zoom-in; }
+.sent-images img:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#image-viewer { width: min(1100px, 90vw); max-width: 90vw; max-height: 90vh; box-sizing: border-box; padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); color: var(--text); cursor: zoom-out; }
+#image-viewer::backdrop { background: rgba(0, 0, 0, .8); }
+#image-viewer[open] { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+#image-viewer-image { display: block; width: 100%; min-height: 0; max-height: calc(90vh - 140px); object-fit: contain; }
+#image-viewer-caption { overflow-wrap: anywhere; text-align: center; flex-shrink: 0; }
+
+.thinking-preview { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: .75; }
+.thinking[open] .thinking-preview { display: none; }
+.thinking { width: 100%; }
+/* Expanded thoughts use the conversation's scrollbar, without a nested scroll area. */
+.thinking-content { white-space: pre-wrap; margin-top: 6px; }
+
+.answer-preview { white-space: pre-wrap; }
+.answer-block > :first-child { margin-top: 0; }
+
+.card.tool-progress .card-title { margin: 0; }
+.tool-progress-results:not(:empty) { margin-top: 8px; }
+.tool-progress-meter { margin-top: 8px; }
+.tool-progress-meter progress { display: block; width: 100%; height: 8px; accent-color: var(--ok); }
+.tool-progress-count { margin-top: 4px; font-size: 12px; color: var(--muted); }
+.tool-progress[data-running="true"] .card-title::before {
+  content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 7px;
+  border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%;
+  vertical-align: -1px; animation: tool-progress-spin .85s linear infinite;
+}
+@keyframes tool-progress-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .tool-progress[data-running="true"] .card-title::before { animation: none; }
+}
+.tool-progress-result { padding: 3px 0; font-size: 13px; overflow-wrap: anywhere; white-space: pre-wrap; }
+#add-actions { position: relative; flex-shrink: 0; }
+#add { width: 42px; height: 42px; padding: 0; font-size: 24px; }
+#add-menu { position: absolute; bottom: calc(100% + 8px); left: 0; min-width: 190px; padding: 6px; border: 1px solid var(--border); border-radius: 10px; background: var(--panel); box-shadow: 0 4px 16px #0002; z-index: 10; }
+#add-menu button { display: block; width: 100%; text-align: left; white-space: nowrap; }
+#add-menu button[hidden] { display: none; }
+
+/* Images waiting for the next question, shown above the input. */
+#attachments {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+}
+#attachments[hidden] { display: none; }
+.attachment {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.attachment img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.attachment button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  line-height: 20px;
+  border-radius: 0 7px 0 7px;
+}
+#attachment-notice {
+  padding: 8px 16px;
+  color: var(--danger);
+  background: var(--panel);
+  font-size: 13px;
+}
+#attachment-notice[hidden] { display: none; }
+/* While image files are dragged over the window. */
+#composer.dropping { outline: 2px dashed var(--accent); outline-offset: -4px; }
+
+
+/* Additional main features use Kodama tokens; the Studio layout stays in style.css. */
+:root { --panel:var(--surface); --muted:var(--text-muted); --danger:var(--error); --danger-bg:var(--error-soft); --danger-border:var(--error); --ok:var(--success); --code-bg:var(--surface-3); --mono:var(--font-mono); }
+[hidden] { display:none !important; }
+.card:not([open]) > .card-title { margin-bottom:0; }
+.card.approval { border-color:var(--warn); }
+.card.approval.danger { border-color:var(--error); }
+.card .card-status.allowed { color:var(--success); }
+.card .card-status.denied { color:var(--error); }
+#input { min-width:0; }
+#add { width:32px; height:32px; font-size:22px; }
+#add-menu { background:var(--surface); }
+#attachments { margin:0 12px 8px; padding:10px; border:1px solid var(--border); border-radius:var(--radius-lg); background:var(--surface); }
+#attachment-notice { margin:0 12px 8px; background:var(--surface); }
+
+/* Read-only file view (Excel, PDF, Word, images, media, text) */
+#viewer:not([hidden]) { flex: 1; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.view-sheets { display: flex; gap: 6px; flex-wrap: wrap; }
+.view-sheets button.active { background: var(--accent-soft); color: var(--accent); }
+.view-table-wrap { max-width: 100%; overflow: auto; border: 1px solid var(--border); border-radius: 6px; }
+.view-table { border-collapse: collapse; font-size: 12px; background: white; }
+.view-table th, .view-table td { border: 1px solid var(--border); padding: 3px 8px; white-space: pre-wrap; max-width: 320px; vertical-align: top; text-align: left; }
+.view-table th { background: var(--surface-2, #f3f3f1); position: sticky; top: 0; }
+.view-page { max-width: 100%; border: 1px solid var(--border); box-shadow: 0 1px 4px rgba(0, 0, 0, .08); background: white; }
+.view-image { max-width: 100%; max-height: 70vh; object-fit: contain; border: 1px solid var(--border); border-radius: 6px; }
+.view-media { max-width: 100%; }
+.view-text { margin: 0; width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; background: white; border: 1px solid var(--border); border-radius: 6px; padding: 10px; }
+.view-markdown, .view-paragraph { max-width: 75ch; }
+.view-paragraph { margin: 0; white-space: pre-wrap; }
+body.mini[data-studio-view='preview'] #studio { display: flex; }
+body.mini[data-studio-view='preview'] #main { display: none; }
+#preview-canvas { flex: 1; min-height: 100px; position: relative; overflow: auto; background: var(--surface-2); }
+#preview-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 100%; padding: 20px; text-align: center; color: var(--text-muted); font-size: 12px; }
+#preview-empty p { margin: 0; line-height: 1.7; }
+#preview-canvas #preview-frame { position: absolute; top: 0; left: 0; max-width: none; box-sizing: border-box; }
+.preview-display-options { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 11px; }
+#preview-settings { flex-shrink: 0; font-size: 11px; color: var(--text-muted); }
+#preview-settings > summary { cursor: pointer; padding: 4px 0; }
+#preview-settings[open] { max-height: 180px; overflow: auto; }
+#preview-settings > p, #preview-settings > div { margin: 6px 0; }
+#preview-width { min-width: 0; max-width: 100%; font-size: 11px; padding: 4px; }
+
+/* Center the attachment control optically, including multiline drafts. */
+#add-actions { display:flex; align-items:center; align-self:center; }
+#add { display:grid; place-items:center; line-height:1; padding:0; flex-shrink:0; }
+#add svg { display:block; flex-shrink:0; }
+
+/* Tool suggestions when the chat input starts with "/" */
+#composer { position: relative; }
+.slash-menu { position: absolute; left: 0; right: 0; bottom: calc(100% + 6px); max-height: 260px; overflow-y: auto; z-index: 20; padding: 4px; border: 1px solid var(--border-strong); border-radius: var(--radius-lg); background: var(--surface); box-shadow: 0 8px 24px rgba(0, 0, 0, .12); }
+.slash-item { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+.slash-item.active, .slash-item:hover { background: var(--accent-soft); }
+.slash-title { font-weight: 600; }
+.slash-name { color: var(--text-muted); font-family: var(--font-mono); font-size: 12px; align-self: center; }
+.slash-description { grid-column: 1 / -1; color: var(--text-muted); font-size: 12px; }
